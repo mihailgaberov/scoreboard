@@ -66,7 +66,7 @@ const scores = [
 const ScoreboardsGrid = () => {
     return (
         <div className={classes.grid}>
-            {scores?.map(pairScore => <Scoreboard pairScore={pairScore} />)}
+            {scores?.map(pairScore => <Scoreboard key={crypto.randomUUID()} pairScore={pairScore} />)}
         </div>
     );
 };
