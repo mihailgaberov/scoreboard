@@ -4,8 +4,8 @@ function App() {
     return (
         <div className={classes.app}>
             <header>
-                <img src='./logo.svg' alt='Football World Cup Scoreboard'/>
-                <h2>Football World Cup Scoreboard</h2>
+                <img src='./logo.svg' alt='FIFA World Cup Scoreboard'/>
+                <h2>FIFA World Cup Scoreboard</h2>
             </header>
             <main>
                 scoreboard here...
