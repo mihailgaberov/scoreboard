@@ -1,4 +1,5 @@
 import classes from './app.module.scss'
+import ScoreboardsGrid from "./components/ScoreboardsGrid/index.jsx";
 
 function App() {
     return (
@@ -8,7 +9,7 @@ function App() {
                 <h2>FIFA World Cup Scoreboard</h2>
             </header>
             <main>
-                scoreboard here...
+                <ScoreboardsGrid />
             </main>
         </div>
     )
