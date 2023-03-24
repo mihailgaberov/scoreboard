@@ -33,14 +33,17 @@ const ScoreboardsGrid = () => {
         cancel();
     }
 
-
     return (
         <>
             {timeElapsed === 0 ?
                 <>
                     <MessageBoard message={'Current Games'}/>
                     <div className={classes.grid}>
-                        {state.games?.map(pairScore => (<Scoreboard key={crypto.randomUUID()} pairScore={pairScore}/>))}
+                        {state.games?.map(pairScore => (
+                            <Scoreboard
+                                key={crypto.randomUUID()}
+                                pairScore={pairScore}
+                                status={'Started'} />))}
                     </div>
                 </> :
                 <MessageBoard message={`Games are about to start in ${timeElapsed} seconds.`}/>
