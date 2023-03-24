@@ -1,9 +1,9 @@
 export const initialState = {
     team: null,
     gameId: null,
-    scores: [
+    games: [
         {
-          gameId: 1,
+            gameId: 1,
             gameData: {
                 startedGame: false,
                 homeTeam: {
@@ -92,18 +92,19 @@ export const actionTypes = {
 }
 
 const reducer = (state, action) => {
-    console.log('>>> action: ', action)
     const data = action.data;
 
     console.log('>>> data: ', data)
-    console.log('>>> state: ', state)
+    console.log('>>> state: ', state.games)
 
     switch (action.type) {
         case actionTypes.START_GAME:
 
             return {
                 ...state,
-                startGames: true,
+                games: state.games.map((game) => game.gameId === data.gameId ? { ...game, startedGame: true }
+                    : game
+                )
             }
         case actionTypes.UPDATE_SCORE:
             const { whichTeam, whichGame } = data;
