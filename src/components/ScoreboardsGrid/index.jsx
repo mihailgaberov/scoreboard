@@ -23,14 +23,21 @@ const ScoreboardsGrid = () => {
         }
     }, 1000);
 
+    // Start games in random moment of time
     const delay = [1000, 4000];
-    const cancel = useRandomInterval(() => {
+    const cancelStartGameInterval = useRandomInterval(() => {
         dispatch({type: actionTypes.START_GAME, data: { gameId: getRandomInt(1, state.games.length)}});
     }, ...delay);
 
     if (areAllGamesStarted(state.games)) {
-        cancel();
+        cancelStartGameInterval();
     }
+
+    // Start game score updates
+    const updateScoreDelay = [1000, 8000];
+    const cancelUpdateScoreInterval = useRandomInterval(() => {
+        dispatch({type: actionTypes.UPDATE_SCORE, data: { gameId: getRandomInt(1, state.games.length), teamId: getRandomInt(1, 2) }});
+    }, ...updateScoreDelay);
 
     return (
         <>

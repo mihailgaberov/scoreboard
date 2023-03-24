@@ -1,3 +1,8 @@
+const teamsMap = {
+    1: 'homeTeam',
+    2: 'awayTeam'
+}
+
 export const initialState = {
     team: null,
     gameId: null,
@@ -104,12 +109,35 @@ const reducer = (state, action) => {
                 )
             }
         case actionTypes.UPDATE_SCORE:
-            const { whichTeam, whichGame } = data;
+            const { teamId, gameId } = data;
+
+            // Don't update the score if the game has not started yer
+            const isGameStarted = state.games.find(game => game.gameId === gameId).startedGame === true;
+            if (!isGameStarted) {
+                return state;
+            }
+
+            // Increment the goals value of the team who scored
+            const team = teamsMap[teamId];
+            const updatedGames = state.games.map(game => {
+                if (game.gameId === gameId) {
+                    return {
+                        ...game,
+                        gameData: {
+                            ...game.gameData,
+                            [team]: {
+                                ...game.gameData[team],
+                                score: game.gameData[team].score++
+                            }
+                        }
+                    }
+                }
+                return game;
+            })
 
             return {
                 ...state,
-                team: whichTeam,
-                gameId: whichGame
+                games: updatedGames
             }
         case actionTypes.FINISH_GAME:
             return {
