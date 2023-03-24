@@ -6,6 +6,7 @@ const teamsMap = {
 export const initialState = {
     team: null,
     gameId: null,
+    finishedGames: [],
     games: [
         {
             gameId: 1,
@@ -140,9 +141,10 @@ const reducer = (state, action) => {
                 games: updatedGames
             }
         case actionTypes.FINISH_GAME:
+
             return {
                 ...state,
-                startGames: false
+                finishedGames: state.games.map((game) => game.gameId === data.gameId ? game : null)
             }
         default:
             throw new Error('Unrecognized action type. Please check ScoresReducer.');
