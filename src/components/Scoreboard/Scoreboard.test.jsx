@@ -1,6 +1,6 @@
 import {render, screen} from '@testing-library/react';
 import {describe, expect, it} from 'vitest';
-import Scoreboard from "./index.jsx";
+import Scoreboard from "./index";
 
 describe('Scoreboard', () => {
     it('renders correctly', () => {

@@ -1,5 +1,5 @@
 import classes from './app.module.scss'
-import ScoreboardsGrid from "./components/ScoreboardsGrid/index.jsx";
+import ScoreboardsGrid from "./components/ScoreboardsGrid/index";
 
 function App() {
     return (

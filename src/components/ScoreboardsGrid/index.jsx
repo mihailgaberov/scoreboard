@@ -1,5 +1,5 @@
 import classes from "./scoreboards-grid.module.scss";
-import Scoreboard from "../Scoreboard/index.jsx";
+import Scoreboard from "../Scoreboard";
 
 const scores = [
     {
