@@ -1,5 +1,9 @@
+import { useState } from "react";
+
 import classes from "./scoreboards-grid.module.scss";
 import Scoreboard from "../Scoreboard";
+import useInterval from "../../hooks/useInterval";
+import MessageBoard from "../MessageBoard";
 
 const scores = [
     {
@@ -63,11 +67,31 @@ const scores = [
         }
     },
 ];
+
+const TIME_BEFORE_GAMES_START = 3; // sec
 const ScoreboardsGrid = () => {
+    const [timeElapsed, setTimeElapsed] = useState(TIME_BEFORE_GAMES_START);
+
+    useInterval(() => {
+        setTimeElapsed((timeElapsed) => timeElapsed - 1);
+
+        if (timeElapsed === 0) {
+            setTimeElapsed(timeElapsed); // stop the timer
+        }
+    }, 1000);
+
     return (
-        <div className={classes.grid}>
-            {scores?.map(pairScore => <Scoreboard key={crypto.randomUUID()} pairScore={pairScore} />)}
-        </div>
+        <>
+            {timeElapsed === 0 ?
+                <>
+                    <MessageBoard message={'Current Games'}/>
+                    <div className={classes.grid}>
+                        {scores?.map(pairScore => (<Scoreboard key={crypto.randomUUID()} pairScore={pairScore}/>))}
+                    </div>
+                </> :
+                <MessageBoard message={`Games are about to start in ${timeElapsed} seconds.`}/>
+            }
+        </>
     );
 };
 
