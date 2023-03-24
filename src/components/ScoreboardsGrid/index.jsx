@@ -5,7 +5,7 @@ import Scoreboard from "../Scoreboard";
 import useInterval from "../../hooks/useInterval";
 import MessageBoard from "../MessageBoard";
 
-const scores = [
+const initialScores = [
     {
         homeTeam: {
             name: 'Mexico',
@@ -15,55 +15,55 @@ const scores = [
         awayTeam: {
             name: 'Canada',
             countryCode: 'ca',
-            score: 5
+            score: 0
         }
     },
     {
         homeTeam: {
             name: 'Spain',
             countryCode: 'es',
-            score: 10
+            score: 0
         },
         awayTeam: {
             name: 'Brazil',
             countryCode: 'br',
-            score: 2
+            score: 0
         }
     },
     {
         homeTeam: {
             name: 'Germany',
             countryCode: 'de',
-            score: 2
+            score: 0
         },
         awayTeam: {
             name: 'France',
             countryCode: 'fr',
-            score: 2
+            score: 0
         }
     },
     {
         homeTeam: {
             name: 'Uruguay',
             countryCode: 'uy',
-            score: 6
+            score: 0
         },
         awayTeam: {
             name: 'Italy',
             countryCode: 'it',
-            score: 6
+            score: 0
         }
     },
     {
         homeTeam: {
             name: 'Argentina',
             countryCode: 'ar',
-            score: 3
+            score: 0
         },
         awayTeam: {
             name: 'Australia',
             countryCode: 'au',
-            score: 1
+            score: 0
         }
     },
 ];
@@ -86,7 +86,7 @@ const ScoreboardsGrid = () => {
                 <>
                     <MessageBoard message={'Current Games'}/>
                     <div className={classes.grid}>
-                        {scores?.map(pairScore => (<Scoreboard key={crypto.randomUUID()} pairScore={pairScore}/>))}
+                        {initialScores?.map(pairScore => (<Scoreboard key={crypto.randomUUID()} pairScore={pairScore}/>))}
                     </div>
                 </> :
                 <MessageBoard message={`Games are about to start in ${timeElapsed} seconds.`}/>
