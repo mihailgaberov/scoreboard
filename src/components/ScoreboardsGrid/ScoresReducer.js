@@ -94,9 +94,6 @@ export const actionTypes = {
 const reducer = (state, action) => {
     const data = action.data;
 
-    console.log('>>> data: ', data)
-    console.log('>>> state: ', state.games)
-
     switch (action.type) {
         case actionTypes.START_GAME:
 
