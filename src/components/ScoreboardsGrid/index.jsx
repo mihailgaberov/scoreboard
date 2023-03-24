@@ -1,76 +1,18 @@
-import { useState } from "react";
+import { useReducer, useState } from "react";
 
 import classes from "./scoreboards-grid.module.scss";
 import Scoreboard from "../Scoreboard";
 import useInterval from "../../hooks/useInterval";
 import MessageBoard from "../MessageBoard";
+import ScoresReducer, { actionTypes, initialState } from "./ScoresReducer";
+import useTimeout from "../../hooks/useTimeout";
 
-const initialScores = [
-    {
-        homeTeam: {
-            name: 'Mexico',
-            countryCode: 'mx',
-            score: 0
-        },
-        awayTeam: {
-            name: 'Canada',
-            countryCode: 'ca',
-            score: 0
-        }
-    },
-    {
-        homeTeam: {
-            name: 'Spain',
-            countryCode: 'es',
-            score: 0
-        },
-        awayTeam: {
-            name: 'Brazil',
-            countryCode: 'br',
-            score: 0
-        }
-    },
-    {
-        homeTeam: {
-            name: 'Germany',
-            countryCode: 'de',
-            score: 0
-        },
-        awayTeam: {
-            name: 'France',
-            countryCode: 'fr',
-            score: 0
-        }
-    },
-    {
-        homeTeam: {
-            name: 'Uruguay',
-            countryCode: 'uy',
-            score: 0
-        },
-        awayTeam: {
-            name: 'Italy',
-            countryCode: 'it',
-            score: 0
-        }
-    },
-    {
-        homeTeam: {
-            name: 'Argentina',
-            countryCode: 'ar',
-            score: 0
-        },
-        awayTeam: {
-            name: 'Australia',
-            countryCode: 'au',
-            score: 0
-        }
-    },
-];
+
 
 const TIME_BEFORE_GAMES_START = 3; // sec
 const ScoreboardsGrid = () => {
     const [timeElapsed, setTimeElapsed] = useState(TIME_BEFORE_GAMES_START);
+    const [state, dispatch] = useReducer(ScoresReducer, initialState);
 
     useInterval(() => {
         setTimeElapsed((timeElapsed) => timeElapsed - 1);
@@ -80,13 +22,15 @@ const ScoreboardsGrid = () => {
         }
     }, 1000);
 
+    useTimeout(() => dispatch({type: actionTypes.START_GAME}), 5);
+
     return (
         <>
             {timeElapsed === 0 ?
                 <>
                     <MessageBoard message={'Current Games'}/>
                     <div className={classes.grid}>
-                        {initialScores?.map(pairScore => (<Scoreboard key={crypto.randomUUID()} pairScore={pairScore}/>))}
+                        {state.scores?.map(pairScore => (<Scoreboard key={crypto.randomUUID()} pairScore={pairScore}/>))}
                     </div>
                 </> :
                 <MessageBoard message={`Games are about to start in ${timeElapsed} seconds.`}/>

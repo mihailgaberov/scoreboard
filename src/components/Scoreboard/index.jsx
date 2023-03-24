@@ -5,9 +5,9 @@ import Result from "../Result";
 const Scoreboard = ({ pairScore }) => {
     return (
         <div className={classes.scoreboard}>
-            <TeamView teamData={pairScore.homeTeam} />
-            <Result homeTeamScore={pairScore.homeTeam.score} awayTeamScore={pairScore.awayTeam.score} />
-            <TeamView teamData={pairScore.awayTeam} />
+            <TeamView teamData={pairScore.gameData.homeTeam} />
+            <Result homeTeamScore={pairScore.gameData.homeTeam.score} awayTeamScore={pairScore.gameData.awayTeam.score} />
+            <TeamView teamData={pairScore.gameData.awayTeam} />
         </div>
     );
 };

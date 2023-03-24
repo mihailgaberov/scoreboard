@@ -6,15 +6,19 @@ describe('Scoreboard', () => {
     it('renders correctly', () => {
         render(<Scoreboard pairScore={
             {
-                homeTeam: {
-                    name: 'Argentina',
-                    countryCode: 'ar',
-                    score: 3
-                },
-                awayTeam: {
-                    name: 'Australia',
-                    countryCode: 'au',
-                    score: 1
+                gameId: 5,
+                gameData: {
+                    startedGame: false,
+                    homeTeam: {
+                        name: 'Argentina',
+                        countryCode: 'ar',
+                        score: 0
+                    },
+                    awayTeam: {
+                        name: 'Australia',
+                        countryCode: 'au',
+                        score: 0
+                    }
                 }
             }
         } />);
