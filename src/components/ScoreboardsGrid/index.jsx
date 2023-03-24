@@ -24,7 +24,6 @@ const ScoreboardsGrid = () => {
     }, 1000);
 
     const delay = [1000, 4000];
-
     const cancel = useRandomInterval(() => {
         dispatch({type: actionTypes.START_GAME, data: { gameId: getRandomInt(1, state.games.length)}});
     }, ...delay);
@@ -43,7 +42,7 @@ const ScoreboardsGrid = () => {
                             <Scoreboard
                                 key={crypto.randomUUID()}
                                 pairScore={pairScore}
-                                status={'Started'} />))}
+                                status={pairScore.startedGame ? 'Started' : ''} />))}
                     </div>
                 </> :
                 <MessageBoard message={`Games are about to start in ${timeElapsed} seconds.`}/>
