@@ -136,6 +136,10 @@ const reducer = (state, action) => {
                     state.games.find((game) => game.gameId === gameId)
                 ].filter(Boolean) // filter(Boolean) keeps the array clean, i.e. removes `undefined` or `null`
                  .sort(sortGamesByTotalScore)
+                 .map(game => {
+                     game.startedGame = false;
+                     return game;
+                 })
             }
         default:
             throw new Error('Unrecognized action type. Please check ScoresReducer.');

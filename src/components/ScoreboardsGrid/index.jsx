@@ -61,7 +61,7 @@ const ScoreboardsGrid = () => {
         setIsPlayingTime(false);
     }, PLAYING_TIME);
 
-    const getGameStatus = (isGameStarted) => isGameStarted ? 'Started' : '';
+    const getGameStatus = (isGameStarted) => isGameStarted ? 'Playing' : '';
 
     const getScoreBoardStateMessage = () => areAllGamesFinished(games) ? 'Summary'  : 'Current Games';
 
