@@ -124,10 +124,15 @@ const reducer = (state, action) => {
                     game)
             }
         case actionTypes.FINISH_GAME:
+            console.log(">>> FINISH_GAME: gameId:", gameId);
 
             return {
                 ...state,
-                finishedGames: state.games.map((game) => game.gameId === gameId ? game : null)
+                games: state.games.filter(game => game.gameId !== gameId),
+                finishedGames: [
+                    ...state.finishedGames,
+                    state.games.find((game) => game.gameId === gameId ? game : null)
+                ].filter(Boolean) // filter(Boolean) keeps the array clean, i.e. removes `undefined` or `null`
             }
         default:
             throw new Error('Unrecognized action type. Please check ScoresReducer.');

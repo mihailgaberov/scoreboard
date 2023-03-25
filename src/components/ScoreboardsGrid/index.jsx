@@ -6,7 +6,7 @@ import useInterval from "../../hooks/useInterval";
 import MessageBoard from "../MessageBoard";
 import ScoresReducer, { actionTypes, initialState } from "./ScoresReducer";
 import useRandomInterval from "../../hooks/useRandomInterval";
-import { areAllGamesStarted, getRandomInt } from "../../utils";
+import { areAllGamesFinished, getRandomInt } from "../../utils";
 import useTimeout from "../../hooks/useTimeout";
 
 
@@ -15,6 +15,12 @@ const PLAYING_TIME = 45000; // milliseconds
 const ScoreboardsGrid = () => {
     const [timeElapsed, setTimeElapsed] = useState(TIME_BEFORE_GAMES_START);
     const [state, dispatch] = useReducer(ScoresReducer, initialState);
+    const [isPlayingTime, setIsPlayingTime] = useState(true);
+
+    const minGameId = 0;
+    const { games, finishedGames } = state;
+    const gamesToRender = games.length > 0 ? games : finishedGames;
+    const maxGameId = games.length - 1;
 
     // Initial countdown time interval
     useInterval(() => {
@@ -27,20 +33,13 @@ const ScoreboardsGrid = () => {
 
     // Start games in random moment of time
     const delay = [3000, 4000];
-    const minGameId = 0;
-    const maxGameId = state.games.length - 1;
-    const cancelStartGameInterval = useRandomInterval(() => {
-        dispatch({ type: actionTypes.START_GAME, data: { gameId: getRandomInt(minGameId, maxGameId) } });
+    const cancelUpdateGameState = useRandomInterval(() => {
+        if (isPlayingTime) {
+            dispatch({ type: actionTypes.START_GAME, data: { gameId: getRandomInt(minGameId, maxGameId) } });
+        } else {
+            dispatch({ type: actionTypes.FINISH_GAME, data: { gameId: getRandomInt(minGameId, initialState.games.length - 1) } });
+        }
     }, ...delay);
-
-    /*const initFinalizingGames = () => {
-        cancelUpdateScoreInterval();
-
-        const finishGameDelay = [1000, 8000];
-        const cancelFinishGamesInterval = useRandomInterval(() => {
-            dispatch({ type: actionTypes.FINISH_GAME, data: { gameId: getRandomInt(1, state.games.length) } });
-        }, ...finishGameDelay);
-    }*/
 
     // Start game score updates
     const updateScoreDelay = [3000, 8000];
@@ -51,30 +50,28 @@ const ScoreboardsGrid = () => {
         });
     }, ...updateScoreDelay);
 
-    if (areAllGamesStarted(state.games)) {
-        cancelStartGameInterval();
+    if (areAllGamesFinished(games)) {
+        cancelUpdateGameState();
     }
 
     // Start a timeout for when to finish the games
     useTimeout(() => {
-        console.log(">>> Playing time ended. Cancel score updates.")
-         cancelUpdateScoreInterval();
-     }, PLAYING_TIME);
-
-    /* const finishGameDelay = [FINISH_GAMES_MIN_DELAY, FINISH_GAMES_MAX_DELAY];
-     const cancelFinishGamesInterval = useRandomInterval(() => {
-         dispatch({ type: actionTypes.FINISH_GAME, data: { gameId: getRandomInt(1, state.games.length) } });
-     }, ...finishGameDelay);*/
+        console.log(">>> Playing time ended. Cancel score updates.");
+        cancelUpdateScoreInterval();
+        setIsPlayingTime(false);
+    }, PLAYING_TIME);
 
     const getGameStatus = (isGameStarted) => isGameStarted ? 'Started' : '';
+
+    const getScoreBoardStateMessage = () => areAllGamesFinished(games) ? 'Summary'  : 'Current Games';
 
     return (
         <>
             {timeElapsed === 0 ?
                 <>
-                    <MessageBoard message={'Current Games'}/>
+                    <MessageBoard message={getScoreBoardStateMessage()}/>
                     <div className={classes.grid}>
-                        {state.games?.map(pairScore => (
+                        {gamesToRender?.map(pairScore => (
                             <Scoreboard
                                 key={crypto.randomUUID()}
                                 pairScore={pairScore}
