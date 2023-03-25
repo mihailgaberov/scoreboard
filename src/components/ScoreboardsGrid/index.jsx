@@ -7,13 +7,9 @@ import MessageBoard from "../MessageBoard";
 import ScoresReducer, { actionTypes, initialState } from "./ScoresReducer";
 import useRandomInterval from "../../hooks/useRandomInterval";
 import { areAllGamesStarted, getRandomInt } from "../../utils";
-import useTimeout from "../../hooks/useTimeout";
 
 
 const TIME_BEFORE_GAMES_START = 3; // seconds
-const PLAYING_TIME = 30000 // seconds
-const FINISH_GAMES_MIN_DELAY = 30000;
-const FINISH_GAMES_MAX_DELAY = 33000;
 
 const ScoreboardsGrid = () => {
     const [timeElapsed, setTimeElapsed] = useState(TIME_BEFORE_GAMES_START);
@@ -57,14 +53,16 @@ const ScoreboardsGrid = () => {
     }
 
     // Start a timeout for when to finish the games
-    useTimeout(() => {
+   /* useTimeout(() => {
         cancelUpdateScoreInterval();
-    }, PLAYING_TIME);
+    }, PLAYING_TIME);*/
 
    /* const finishGameDelay = [FINISH_GAMES_MIN_DELAY, FINISH_GAMES_MAX_DELAY];
     const cancelFinishGamesInterval = useRandomInterval(() => {
         dispatch({ type: actionTypes.FINISH_GAME, data: { gameId: getRandomInt(1, state.games.length) } });
     }, ...finishGameDelay);*/
+
+    const getGameStatus = (isGameStarted) => isGameStarted ? 'Started' : '';
 
     return (
         <>
@@ -76,7 +74,7 @@ const ScoreboardsGrid = () => {
                             <Scoreboard
                                 key={crypto.randomUUID()}
                                 pairScore={pairScore}
-                                status={pairScore.startedGame ? 'Started' : ''}/>))}
+                                status={getGameStatus(pairScore.startedGame)}/>))}
                     </div>
                 </> :
                 <MessageBoard message={`Games are about to start in ${timeElapsed} seconds.`}/>
