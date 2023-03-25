@@ -11,7 +11,7 @@ import useTimeout from "../../hooks/useTimeout";
 
 
 const TIME_BEFORE_GAMES_START = 3; // seconds
-const PLAYING_TIME = 45000; // milliseconds
+const PLAYING_TIME = 90000; // milliseconds
 const ScoreboardsGrid = () => {
     const [timeElapsed, setTimeElapsed] = useState(TIME_BEFORE_GAMES_START);
     const [state, dispatch] = useReducer(ScoresReducer, initialState);
