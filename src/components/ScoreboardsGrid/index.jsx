@@ -25,7 +25,7 @@ const ScoreboardsGrid = () => {
     }, 1000);
 
     // Start games in random moment of time
-    const delay = [1000, 4000];
+    const delay = [3000, 4000];
     const cancelStartGameInterval = useRandomInterval(() => {
         dispatch({ type: actionTypes.START_GAME, data: { gameId: getRandomInt(1, state.games.length) } });
     }, ...delay);
@@ -40,7 +40,7 @@ const ScoreboardsGrid = () => {
     }*/
 
     // Start game score updates
-    const updateScoreDelay = [1000, 8000];
+    const updateScoreDelay = [3000, 8000];
     const cancelUpdateScoreInterval = useRandomInterval(() => {
         dispatch({
             type: actionTypes.UPDATE_SCORE,

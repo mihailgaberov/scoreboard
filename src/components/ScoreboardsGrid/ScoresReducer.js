@@ -99,18 +99,19 @@ export const actionTypes = {
 
 const reducer = (state, action) => {
     const data = action.data;
+    const { gameId } = data;
 
     switch (action.type) {
         case actionTypes.START_GAME:
-
+            console.log(">>> START_GAME: gameId:", gameId);
             return {
                 ...state,
-                games: state.games.map((game) => game.gameId === data.gameId ? { ...game, startedGame: true }
+                games: state.games.map((game) => game.gameId === gameId ? { ...game, startedGame: true }
                     : game
                 )
             }
         case actionTypes.UPDATE_SCORE:
-            const { teamId, gameId } = data;
+            const { teamId } = data;
             console.log(">>> UPDATE_SCORE: gameId:", gameId, " | team: ", teamsMap[teamId]);
 
             // Don't update the score if the game has not started yer
@@ -145,7 +146,7 @@ const reducer = (state, action) => {
 
             return {
                 ...state,
-                finishedGames: state.games.map((game) => game.gameId === data.gameId ? game : null)
+                finishedGames: state.games.map((game) => game.gameId === gameId ? game : null)
             }
         default:
             throw new Error('Unrecognized action type. Please check ScoresReducer.');
