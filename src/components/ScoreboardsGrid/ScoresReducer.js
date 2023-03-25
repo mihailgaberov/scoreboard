@@ -7,6 +7,10 @@ export const initialState = {
     team: null,
     gameId: null,
     finishedGames: [],
+    latestUpdate: {
+        gameId: null,
+        team: ''
+    },
     games: [
         {
             gameId: 1,
@@ -113,7 +117,16 @@ const reducer = (state, action) => {
         case actionTypes.UPDATE_SCORE:
             const { teamId } = data;
 
-            // Don't update the score if the game has not started yer
+            // TODO: temp debugging code - remove later
+            return {
+                ...state,
+                latestUpdate: {
+                    team: teamsMap[teamId],
+                    gameId
+                }
+            }
+
+            /*// Don't update the score if the game has not started yer
             const isGameStarted = state.games.find(game => game.gameId === gameId && game.startedGame === true);
             if (!isGameStarted) {
                 return state;
@@ -142,7 +155,7 @@ const reducer = (state, action) => {
             return {
                 ...state,
                 games: updatedGames
-            }
+            }*/
         case actionTypes.FINISH_GAME:
 
             return {
