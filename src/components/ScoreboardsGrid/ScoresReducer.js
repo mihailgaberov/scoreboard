@@ -121,7 +121,7 @@ const reducer = (state, action) => {
             // Increment the goals value of the team who scored
             return {
                 ...state,
-                games: state.games.map((game) => game.gameId === gameId ? { ...game, startedGame: game.score++ } : game)
+                games: state.games.map((game) => game.gameId === gameId ? { ...game, score: game.score++ } : game)
             }
         /*return {
             ...state,
