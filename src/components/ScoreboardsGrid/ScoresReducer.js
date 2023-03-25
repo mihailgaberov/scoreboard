@@ -122,7 +122,7 @@ const reducer = (state, action) => {
                         ...game,
                         homeTeam: {
                             ...game.homeTeam,
-                            score: game.homeTeam.score++
+                            score: game.score++
                         }
                     } :
                     game)
