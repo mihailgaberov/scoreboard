@@ -17,7 +17,6 @@ export const initialState = {
         {
             gameId: 0,
             startedGame: false,
-            score: 0,
             homeTeam: {
                 name: 'Mexico',
                 countryCode: 'mx',
@@ -32,7 +31,6 @@ export const initialState = {
         {
             gameId: 1,
             startedGame: false,
-            score: 0,
             homeTeam: {
                 name: 'Spain',
                 countryCode: 'es',
@@ -47,7 +45,6 @@ export const initialState = {
         {
             gameId: 2,
             startedGame: false,
-            score: 0,
             homeTeam: {
                 name: 'Germany',
                 countryCode: 'de',
@@ -62,7 +59,6 @@ export const initialState = {
         {
             gameId: 3,
             startedGame: false,
-            score: 0,
             homeTeam: {
                 name: 'Uruguay',
                 countryCode: 'uy',
@@ -77,7 +73,6 @@ export const initialState = {
         {
             gameId: 4,
             startedGame: false,
-            score: 0,
             homeTeam: {
                 name: 'Argentina',
                 countryCode: 'ar',
@@ -123,7 +118,7 @@ const reducer = (state, action) => {
                         ...game,
                         [team]: {
                             ...game[team],
-                            score: 23
+                            score: game[team].score + 1
                         }
                     } :
                     game)
