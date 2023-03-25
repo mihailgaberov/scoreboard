@@ -5,14 +5,14 @@ import GameStatus from "../GameStatus";
 
 const Scoreboard = ({ pairScore, status }) => {
     return (
-        <div className={classes.scoreboard}>
+        <section className={classes.scoreboard}>
             <TeamView teamData={pairScore.gameData.homeTeam} />
-            <article>
+            <main>
                 <Result homeTeamScore={pairScore.gameData.homeTeam.score} awayTeamScore={pairScore.gameData.awayTeam.score} />
                 <GameStatus status={status} />
-            </article>
+            </main>
             <TeamView teamData={pairScore.gameData.awayTeam} />
-        </div>
+        </section>
     );
 };
 
