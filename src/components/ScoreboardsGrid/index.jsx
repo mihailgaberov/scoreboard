@@ -7,10 +7,11 @@ import MessageBoard from "../MessageBoard";
 import ScoresReducer, { actionTypes, initialState } from "./ScoresReducer";
 import useRandomInterval from "../../hooks/useRandomInterval";
 import { areAllGamesStarted, getRandomInt } from "../../utils";
+import useTimeout from "../../hooks/useTimeout";
 
 
 const TIME_BEFORE_GAMES_START = 3; // seconds
-
+const PLAYING_TIME = 45000; // milliseconds
 const ScoreboardsGrid = () => {
     const [timeElapsed, setTimeElapsed] = useState(TIME_BEFORE_GAMES_START);
     const [state, dispatch] = useReducer(ScoresReducer, initialState);
@@ -55,9 +56,10 @@ const ScoreboardsGrid = () => {
     }
 
     // Start a timeout for when to finish the games
-    /* useTimeout(() => {
+    useTimeout(() => {
+        console.log(">>> Playing time ended. Cancel score updates.")
          cancelUpdateScoreInterval();
-     }, PLAYING_TIME);*/
+     }, PLAYING_TIME);
 
     /* const finishGameDelay = [FINISH_GAMES_MIN_DELAY, FINISH_GAMES_MAX_DELAY];
      const cancelFinishGamesInterval = useRandomInterval(() => {
