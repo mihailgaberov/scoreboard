@@ -121,7 +121,7 @@ const reducer = (state, action) => {
             const teamToUpdate = gameToUpdate[team];
             const updatedTeam = { ...teamToUpdate, score: teamToUpdate.score++ };
             const updatedGame = { ...gameToUpdate, [team]: updatedTeam };
-            const updatedGames = [...state.games].map(game => {
+            const updatedGames = state.games.map(game => {
                 if (game.gameId === gameId) {
                     return updatedGame;
                 }
@@ -129,10 +129,9 @@ const reducer = (state, action) => {
             });
 
             return {
-                ...state,
                 games: updatedGames,
                 latestUpdate: {
-                    team: teamsMap[teamId],
+                    team,
                     gameId
                 }
 
