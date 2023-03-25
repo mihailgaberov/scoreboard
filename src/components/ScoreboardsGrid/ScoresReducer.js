@@ -112,13 +112,14 @@ const reducer = (state, action) => {
             }
         case actionTypes.UPDATE_SCORE:
             const { teamId } = data;
-            console.log(">>> UPDATE_SCORE: gameId:", gameId, " | team: ", teamsMap[teamId]);
 
             // Don't update the score if the game has not started yer
             const isGameStarted = state.games.find(game => game.gameId === gameId && game.startedGame === true);
             if (!isGameStarted) {
                 return state;
             }
+
+            console.log(">>> UPDATE_SCORE: gameId:", gameId, " | team: ", teamsMap[teamId]);
 
             // Increment the goals value of the team who scored
             const team = teamsMap[teamId];
