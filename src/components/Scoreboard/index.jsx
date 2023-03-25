@@ -8,7 +8,7 @@ const Scoreboard = ({ pairScore, status }) => {
         <section className={classes.scoreboard}>
             <TeamView teamData={pairScore.homeTeam} />
             <main>
-                <Result homeTeamScore={pairScore.score} awayTeamScore={pairScore.awayTeam.score} />
+                <Result homeTeamScore={pairScore.homeTeam.score} awayTeamScore={pairScore.awayTeam.score} />
                 <GameStatus status={status} />
             </main>
             <TeamView teamData={pairScore.awayTeam} />

@@ -2,7 +2,11 @@ const teamsMap = {
     1: 'homeTeam',
     2: 'awayTeam'
 }
-
+export const actionTypes = {
+    START_GAME: 'start',
+    UPDATE_SCORE: 'update',
+    FINISH_GAME: 'finish'
+}
 export const initialState = {
     finishedGames: [],
     latestUpdate: {
@@ -88,12 +92,6 @@ export const initialState = {
     ]
 };
 
-export const actionTypes = {
-    START_GAME: 'start',
-    UPDATE_SCORE: 'update',
-    FINISH_GAME: 'finish'
-}
-
 const reducer = (state, action) => {
     const data = action.data;
     const { gameId } = data;
@@ -120,7 +118,15 @@ const reducer = (state, action) => {
             console.log(">>> state: ", state)
             return {
                 ...state,
-                games: state.games.map((game) => game.gameId === gameId ? { ...game, score: 5555 } : game)
+                games: state.games.map((game) => game.gameId === gameId ?
+                    {
+                        ...game,
+                        homeTeam: {
+                            ...game.homeTeam,
+                            score: 343
+                        }
+                    } :
+                    game)
             }
         /*return {
             ...state,
