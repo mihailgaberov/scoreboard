@@ -123,14 +123,6 @@ const reducer = (state, action) => {
                     } :
                     game)
             }
-        /*return {
-            ...state,
-            games: updatedGames,
-            latestUpdate: {
-                team,
-                gameId
-            }
-        }*/
         case actionTypes.FINISH_GAME:
 
             return {
