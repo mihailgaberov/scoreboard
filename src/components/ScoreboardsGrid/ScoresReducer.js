@@ -4,8 +4,6 @@ const teamsMap = {
 }
 
 export const initialState = {
-    team: null,
-    gameId: null,
     finishedGames: [],
     latestUpdate: {
         gameId: null,
@@ -119,9 +117,10 @@ const reducer = (state, action) => {
             console.log(">>> UPDATE_SCORE: gameId:", gameId, " | team: ", teamsMap[teamId]);
 
             // Increment the goals value of the team who scored
+            console.log(">>> state: ", state)
             return {
                 ...state,
-                games: state.games.map((game) => game.gameId === gameId ? { ...game, score: game.score++ } : game)
+                games: state.games.map((game) => game.gameId === gameId ? { ...game, score: 5555 } : game)
             }
         /*return {
             ...state,
