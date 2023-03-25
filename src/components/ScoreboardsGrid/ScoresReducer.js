@@ -114,7 +114,7 @@ const reducer = (state, action) => {
             console.log(">>> UPDATE_SCORE: gameId: ", gameId, teamId)
 
             // Don't update the score if the game has not started yer
-            const isGameStarted = state.games.find(game => game.gameId === gameId).startedGame === true;
+            const isGameStarted = state.games.find(game => game.gameId === gameId && game.startedGame === true);
             if (!isGameStarted) {
                 return state;
             }
