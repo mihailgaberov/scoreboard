@@ -15,10 +15,6 @@ export const actionTypes = {
 }
 export const initialState = {
     finishedGames: [],
-    latestUpdate: {
-        gameId: null,
-        team: ''
-    },
     games: [
         {
             gameId: 0,
@@ -137,7 +133,7 @@ const reducer = (state, action) => {
                 games: state.games.filter(game => game.gameId !== gameId),
                 finishedGames: [
                     ...state.finishedGames,
-                    state.games.find((game) => game.gameId === gameId ? game : null)
+                    state.games.find((game) => game.gameId === gameId)
                 ].filter(Boolean) // filter(Boolean) keeps the array clean, i.e. removes `undefined` or `null`
                  .sort(sortGamesByTotalScore)
             }
