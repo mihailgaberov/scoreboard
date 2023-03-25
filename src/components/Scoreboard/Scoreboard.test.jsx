@@ -7,7 +7,7 @@ describe('Scoreboard', () => {
         render(<Scoreboard pairScore={
             {
                 gameId: 5,
-                gameData: {
+                scoresData: {
                     startedGame: false,
                     homeTeam: {
                         name: 'Argentina',

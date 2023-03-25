@@ -6,12 +6,12 @@ import GameStatus from "../GameStatus";
 const Scoreboard = ({ pairScore, status }) => {
     return (
         <section className={classes.scoreboard}>
-            <TeamView teamData={pairScore.gameData.homeTeam} />
+            <TeamView teamData={pairScore.scoresData.homeTeam} />
             <main>
-                <Result homeTeamScore={pairScore.gameData.homeTeam.score} awayTeamScore={pairScore.gameData.awayTeam.score} />
+                <Result homeTeamScore={pairScore.scoresData.homeTeam.score} awayTeamScore={pairScore.scoresData.awayTeam.score} />
                 <GameStatus status={status} />
             </main>
-            <TeamView teamData={pairScore.gameData.awayTeam} />
+            <TeamView teamData={pairScore.scoresData.awayTeam} />
         </section>
     );
 };

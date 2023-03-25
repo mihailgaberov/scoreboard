@@ -10,8 +10,8 @@ export const initialState = {
     games: [
         {
             gameId: 1,
-            gameData: {
-                startedGame: false,
+            startedGame: false,
+            scoresData: {
                 homeTeam: {
                     name: 'Mexico',
                     countryCode: 'mx',
@@ -26,8 +26,8 @@ export const initialState = {
         },
         {
             gameId: 2,
-            gameData: {
-                startedGame: false,
+            startedGame: false,
+            scoresData: {
                 homeTeam: {
                     name: 'Spain',
                     countryCode: 'es',
@@ -42,8 +42,8 @@ export const initialState = {
         },
         {
             gameId: 3,
-            gameData: {
-                startedGame: false,
+            startedGame: false,
+            scoresData: {
                 homeTeam: {
                     name: 'Germany',
                     countryCode: 'de',
@@ -58,8 +58,8 @@ export const initialState = {
         },
         {
             gameId: 4,
-            gameData: {
-                startedGame: false,
+            startedGame: false,
+            scoresData: {
                 homeTeam: {
                     name: 'Uruguay',
                     countryCode: 'uy',
@@ -74,8 +74,8 @@ export const initialState = {
         },
         {
             gameId: 5,
-            gameData: {
-                startedGame: false,
+            startedGame: false,
+            scoresData: {
                 homeTeam: {
                     name: 'Argentina',
                     countryCode: 'ar',
@@ -111,6 +111,7 @@ const reducer = (state, action) => {
             }
         case actionTypes.UPDATE_SCORE:
             const { teamId, gameId } = data;
+            console.log(">>> UPDATE_SCORE: gameId: ", gameId, teamId)
 
             // Don't update the score if the game has not started yer
             const isGameStarted = state.games.find(game => game.gameId === gameId).startedGame === true;
@@ -124,11 +125,11 @@ const reducer = (state, action) => {
                 if (game.gameId === gameId) {
                     return {
                         ...game,
-                        gameData: {
-                            ...game.gameData,
+                        scoresData: {
+                            ...game.scoresData,
                             [team]: {
-                                ...game.gameData[team],
-                                score: game.gameData[team].score++
+                                ...game.scoresData[team],
+                                score: game.scoresData[team].score++
                             }
                         }
                     }
