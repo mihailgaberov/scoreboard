@@ -13,83 +13,73 @@ export const initialState = {
     },
     games: [
         {
+            gameId: 0,
+            startedGame: false,
+            homeTeam: {
+                name: 'Mexico',
+                countryCode: 'mx',
+                score: 0
+            },
+            awayTeam: {
+                name: 'Canada',
+                countryCode: 'ca',
+                score: 0
+            }
+        },
+        {
             gameId: 1,
             startedGame: false,
-            scoresData: {
-                homeTeam: {
-                    name: 'Mexico',
-                    countryCode: 'mx',
-                    score: 0
-                },
-                awayTeam: {
-                    name: 'Canada',
-                    countryCode: 'ca',
-                    score: 0
-                }
+            homeTeam: {
+                name: 'Spain',
+                countryCode: 'es',
+                score: 0
+            },
+            awayTeam: {
+                name: 'Brazil',
+                countryCode: 'br',
+                score: 0
             }
         },
         {
             gameId: 2,
             startedGame: false,
-            scoresData: {
-                homeTeam: {
-                    name: 'Spain',
-                    countryCode: 'es',
-                    score: 0
-                },
-                awayTeam: {
-                    name: 'Brazil',
-                    countryCode: 'br',
-                    score: 0
-                }
+            homeTeam: {
+                name: 'Germany',
+                countryCode: 'de',
+                score: 0
+            },
+            awayTeam: {
+                name: 'France',
+                countryCode: 'fr',
+                score: 0
             }
         },
         {
             gameId: 3,
             startedGame: false,
-            scoresData: {
-                homeTeam: {
-                    name: 'Germany',
-                    countryCode: 'de',
-                    score: 0
-                },
-                awayTeam: {
-                    name: 'France',
-                    countryCode: 'fr',
-                    score: 0
-                }
+            homeTeam: {
+                name: 'Uruguay',
+                countryCode: 'uy',
+                score: 0
+            },
+            awayTeam: {
+                name: 'Italy',
+                countryCode: 'it',
+                score: 0
             }
         },
         {
             gameId: 4,
             startedGame: false,
-            scoresData: {
-                homeTeam: {
-                    name: 'Uruguay',
-                    countryCode: 'uy',
-                    score: 0
-                },
-                awayTeam: {
-                    name: 'Italy',
-                    countryCode: 'it',
-                    score: 0
-                }
-            }
-        },
-        {
-            gameId: 5,
-            startedGame: false,
-            scoresData: {
-                homeTeam: {
-                    name: 'Argentina',
-                    countryCode: 'ar',
-                    score: 0
-                },
-                awayTeam: {
-                    name: 'Australia',
-                    countryCode: 'au',
-                    score: 0
-                }
+            homeTeam: {
+                name: 'Argentina',
+                countryCode: 'ar',
+                score: 0
+            },
+            awayTeam: {
+                name: 'Australia',
+                countryCode: 'au',
+                score: 0
             }
         },
     ]
@@ -117,16 +107,7 @@ const reducer = (state, action) => {
         case actionTypes.UPDATE_SCORE:
             const { teamId } = data;
 
-            // TODO: temp debugging code - remove later
-            return {
-                ...state,
-                latestUpdate: {
-                    team: teamsMap[teamId],
-                    gameId
-                }
-            }
-
-            /*// Don't update the score if the game has not started yer
+            // Don't update the score if the game has not started yer
             const isGameStarted = state.games.find(game => game.gameId === gameId && game.startedGame === true);
             if (!isGameStarted) {
                 return state;
@@ -136,26 +117,26 @@ const reducer = (state, action) => {
 
             // Increment the goals value of the team who scored
             const team = teamsMap[teamId];
-            const updatedGames = state.games.map(game => {
+            const gameToUpdate = { ...state.games[gameId] };
+            const teamToUpdate = gameToUpdate[team];
+            const updatedTeam = { ...teamToUpdate, score: teamToUpdate.score++ };
+            const updatedGame = { ...gameToUpdate, [team]: updatedTeam };
+            const updatedGames = [...state.games].map(game => {
                 if (game.gameId === gameId) {
-                    return {
-                        ...game,
-                        scoresData: {
-                            ...game.scoresData,
-                            [team]: {
-                                ...game.scoresData[team],
-                                score: game.scoresData[team].score++
-                            }
-                        }
-                    }
+                    return updatedGame;
                 }
                 return game;
-            })
+            });
 
             return {
                 ...state,
-                games: updatedGames
-            }*/
+                games: updatedGames,
+                latestUpdate: {
+                    team: teamsMap[teamId],
+                    gameId
+                }
+
+            }
         case actionTypes.FINISH_GAME:
 
             return {

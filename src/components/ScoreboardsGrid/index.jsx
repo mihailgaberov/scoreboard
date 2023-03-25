@@ -26,8 +26,10 @@ const ScoreboardsGrid = () => {
 
     // Start games in random moment of time
     const delay = [3000, 4000];
+    const minGameId = 0;
+    const maxGameId = state.games.length - 1;
     const cancelStartGameInterval = useRandomInterval(() => {
-        dispatch({ type: actionTypes.START_GAME, data: { gameId: getRandomInt(1, state.games.length) } });
+        dispatch({ type: actionTypes.START_GAME, data: { gameId: getRandomInt(minGameId, maxGameId) } });
     }, ...delay);
 
     /*const initFinalizingGames = () => {
@@ -53,14 +55,14 @@ const ScoreboardsGrid = () => {
     }
 
     // Start a timeout for when to finish the games
-   /* useTimeout(() => {
-        cancelUpdateScoreInterval();
-    }, PLAYING_TIME);*/
+    /* useTimeout(() => {
+         cancelUpdateScoreInterval();
+     }, PLAYING_TIME);*/
 
-   /* const finishGameDelay = [FINISH_GAMES_MIN_DELAY, FINISH_GAMES_MAX_DELAY];
-    const cancelFinishGamesInterval = useRandomInterval(() => {
-        dispatch({ type: actionTypes.FINISH_GAME, data: { gameId: getRandomInt(1, state.games.length) } });
-    }, ...finishGameDelay);*/
+    /* const finishGameDelay = [FINISH_GAMES_MIN_DELAY, FINISH_GAMES_MAX_DELAY];
+     const cancelFinishGamesInterval = useRandomInterval(() => {
+         dispatch({ type: actionTypes.FINISH_GAME, data: { gameId: getRandomInt(1, state.games.length) } });
+     }, ...finishGameDelay);*/
 
     const getGameStatus = (isGameStarted) => isGameStarted ? 'Started' : '';
 
