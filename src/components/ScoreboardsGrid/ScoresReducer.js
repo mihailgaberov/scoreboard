@@ -2,6 +2,12 @@ const teamsMap = {
     1: 'homeTeam',
     2: 'awayTeam'
 }
+
+const sortGamesByTotalScore = (currentGame, nextGame) => {
+    const currentGameTotalScore = currentGame.homeTeam.score + currentGame.awayTeam.score;
+    const nextGameTotalScore = nextGame.homeTeam.score + nextGame.awayTeam.score;
+    return nextGameTotalScore - currentGameTotalScore;
+}
 export const actionTypes = {
     START_GAME: 'start',
     UPDATE_SCORE: 'update',
@@ -133,6 +139,7 @@ const reducer = (state, action) => {
                     ...state.finishedGames,
                     state.games.find((game) => game.gameId === gameId ? game : null)
                 ].filter(Boolean) // filter(Boolean) keeps the array clean, i.e. removes `undefined` or `null`
+                 .sort(sortGamesByTotalScore)
             }
         default:
             throw new Error('Unrecognized action type. Please check ScoresReducer.');
