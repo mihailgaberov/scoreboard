@@ -15,6 +15,7 @@ export const initialState = {
         {
             gameId: 0,
             startedGame: false,
+            score: 0,
             homeTeam: {
                 name: 'Mexico',
                 countryCode: 'mx',
@@ -29,6 +30,7 @@ export const initialState = {
         {
             gameId: 1,
             startedGame: false,
+            score: 0,
             homeTeam: {
                 name: 'Spain',
                 countryCode: 'es',
@@ -43,6 +45,7 @@ export const initialState = {
         {
             gameId: 2,
             startedGame: false,
+            score: 0,
             homeTeam: {
                 name: 'Germany',
                 countryCode: 'de',
@@ -57,6 +60,7 @@ export const initialState = {
         {
             gameId: 3,
             startedGame: false,
+            score: 0,
             homeTeam: {
                 name: 'Uruguay',
                 countryCode: 'uy',
@@ -71,6 +75,7 @@ export const initialState = {
         {
             gameId: 4,
             startedGame: false,
+            score: 0,
             homeTeam: {
                 name: 'Argentina',
                 countryCode: 'ar',
@@ -116,26 +121,33 @@ const reducer = (state, action) => {
             console.log(">>> UPDATE_SCORE: gameId:", gameId, " | team: ", teamsMap[teamId]);
 
             // Increment the goals value of the team who scored
-            const team = teamsMap[teamId];
-            const gameToUpdate = { ...state.games[gameId] };
-            const teamToUpdate = gameToUpdate[team];
-            const updatedTeam = { ...teamToUpdate, score: teamToUpdate.score++ };
-            const updatedGame = { ...gameToUpdate, [team]: updatedTeam };
+            // const team = teamsMap[teamId];
+            // const gameToUpdate = { ...state.games[gameId] };
+            // const teamToUpdate = gameToUpdate[team];
+            // const updatedTeam = { ...teamToUpdate, score: teamToUpdate.score++ };
+            // const updatedGame = { ...gameToUpdate, [team]: updatedTeam };
             const updatedGames = state.games.map(game => {
                 if (game.gameId === gameId) {
-                    return updatedGame;
+                    return {
+                        ...game,
+                        score: game.score++
+                    }
                 }
                 return game;
             });
 
             return {
+                ...state,
+                games: updatedGames
+            }
+            /*return {
+                ...state,
                 games: updatedGames,
                 latestUpdate: {
                     team,
                     gameId
                 }
-
-            }
+            }*/
         case actionTypes.FINISH_GAME:
 
             return {
