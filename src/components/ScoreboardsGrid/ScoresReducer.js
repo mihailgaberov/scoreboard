@@ -105,9 +105,7 @@ const reducer = (state, action) => {
             console.log(">>> START_GAME: gameId:", gameId);
             return {
                 ...state,
-                games: state.games.map((game) => game.gameId === gameId ? { ...game, startedGame: true }
-                    : game
-                )
+                games: state.games.map((game) => game.gameId === gameId ? { ...game, startedGame: true } : game)
             }
         case actionTypes.UPDATE_SCORE:
             const { teamId } = data;
@@ -121,33 +119,18 @@ const reducer = (state, action) => {
             console.log(">>> UPDATE_SCORE: gameId:", gameId, " | team: ", teamsMap[teamId]);
 
             // Increment the goals value of the team who scored
-            // const team = teamsMap[teamId];
-            // const gameToUpdate = { ...state.games[gameId] };
-            // const teamToUpdate = gameToUpdate[team];
-            // const updatedTeam = { ...teamToUpdate, score: teamToUpdate.score++ };
-            // const updatedGame = { ...gameToUpdate, [team]: updatedTeam };
-            const updatedGames = state.games.map(game => {
-                if (game.gameId === gameId) {
-                    return {
-                        ...game,
-                        score: game.score++
-                    }
-                }
-                return game;
-            });
-
             return {
                 ...state,
-                games: updatedGames
+                games: state.games.map((game) => game.gameId === gameId ? { ...game, startedGame: game.score++ } : game)
             }
-            /*return {
-                ...state,
-                games: updatedGames,
-                latestUpdate: {
-                    team,
-                    gameId
-                }
-            }*/
+        /*return {
+            ...state,
+            games: updatedGames,
+            latestUpdate: {
+                team,
+                gameId
+            }
+        }*/
         case actionTypes.FINISH_GAME:
 
             return {
