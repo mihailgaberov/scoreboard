@@ -46,7 +46,7 @@ const ScoreboardsGrid = () => {
     const cancelUpdateScoreInterval = useRandomInterval(() => {
         dispatch({
             type: actionTypes.UPDATE_SCORE,
-            data: { gameId: getRandomInt(1, state.games.length), teamId: getRandomInt(1, 2) }
+            data: { gameId: getRandomInt(minGameId, maxGameId), teamId: getRandomInt(1, 2) }
         });
     }, ...updateScoreDelay);
 
