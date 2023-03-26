@@ -7,6 +7,7 @@ A React app simulating a **Live Football World Cup Scoreboard**⚽ that shows ma
 - CSS Modules (SASS)
 
 ### Screenshots 📸
+![Animated](https://github.com/mihailgaberov/scoreboard/blob/main/screenshots/animated.gif)
 ![Starting games](https://github.com/mihailgaberov/scoreboard/blob/main/screenshots/starting-games.png)
 ![Running games](https://github.com/mihailgaberov/scoreboard/blob/main/screenshots/running-games.png)
 ![Finalizing games](https://github.com/mihailgaberov/scoreboard/blob/main/screenshots/finalizing-games.png)
