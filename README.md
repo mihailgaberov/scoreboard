@@ -10,7 +10,8 @@ A React app simulating a **Live Football World Cup Scoreboard**⚽ that shows ma
 ![Starting games](https://github.com/mihailgaberov/scoreboard/blob/main/screenshots/starting-games.png)
 ![Running games](https://github.com/mihailgaberov/scoreboard/blob/main/screenshots/running-games.png)
 ![Finalizing games](https://github.com/mihailgaberov/scoreboard/blob/main/screenshots/finalizing-games.png)
-![Summary](https://github.com/mihailgaberov/scoreboard/blob/main/screenshots/summary.png)
+![Desktop View](https://github.com/mihailgaberov/scoreboard/blob/main/screenshots/desktop-view.png)
+![iPad View](https://github.com/mihailgaberov/scoreboard/blob/main/screenshots/ipad-view.png)
 
 ## Application features: ⚙️
 **Live Football World Cup Scoreboard** that shows matches and scores.
