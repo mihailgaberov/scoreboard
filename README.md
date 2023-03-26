@@ -44,7 +44,7 @@ The summary would provide with the following information:
     4. Argentina 3 - Australia 1
     5. Germany 2 - France 2
 
-  ### Improvements 🚀
+  ### Possible Improvements 🚀
     - Add a clock under the game status, say counting down the seconds, to make it look more like a real-time app
     - Add some animation to when updating the scores to make it easier for the user to spot the change
     - Add some interactivity in general:
