@@ -1,5 +1,6 @@
 import classes from './app.module.scss'
 import ScoreboardsGrid from "./components/ScoreboardsGrid";
+import Footer from "./components/Footer/index.jsx";
 
 function App() {
     return (
@@ -11,6 +12,7 @@ function App() {
             <main>
                 <ScoreboardsGrid />
             </main>
+          <Footer />
         </div>
     )
 }
