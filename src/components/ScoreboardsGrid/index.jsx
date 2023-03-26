@@ -51,13 +51,14 @@ const ScoreboardsGrid = () => {
     }, ...updateScoreDelay);
 
     if (areAllGamesFinished(games)) {
+        console.log(">>> All games finished. Cancel all updates.");
         cancelUpdateGameState();
+        cancelUpdateScoreInterval();
     }
 
     // Start a timeout for when to finish the games
     useTimeout(() => {
-        console.log(">>> Playing time ended. Cancel score updates.");
-        cancelUpdateScoreInterval();
+        console.log(">>> Playing time ended. Start finalizing the games.");
         setIsPlayingTime(false);
     }, PLAYING_TIME);
 
