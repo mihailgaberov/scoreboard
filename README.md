@@ -1,12 +1,14 @@
 # Football World Cup Scoreboard
 A React app simulating a **Live Football World Cup Scoreboard**⚽ that shows matches and scores.
 
-_Notes:_ The current implementation uses manually set timers and time intervals for simulating the playing of the games. Here
+**Notes:** The current implementation uses manually set timers and time intervals for simulating the playing of the games. Here
 is a brief explanation of the intended logic:
  1. When the app loads initially a 3...2...1 timer is started to visualize the start of the games
  2. Then another time interval is being triggered so that we can have randomly starting and finishing games (they are being finalized when the playing time expires)
  3. A third time interval is being used for updating, randomly, the scores per game and per team
- 4. After the playing time ends (currently hard coded to be 90 seconds) and all the games finish, the updates are canceled, i.e. the time intervals are cleared 
+ 4. After the playing time ends (currently hard coded to be 90 seconds) and all the games finish, the updates are canceled, i.e. the time intervals are cleared
+
+_A GitHub Actions CI is setup to run build and tests on each commit in the main branch._
 
 ## Tech stack 💾
 - React (with Vite)
