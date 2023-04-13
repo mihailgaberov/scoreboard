@@ -11,7 +11,6 @@ describe('Header', () => {
     })
 
     it('renders correctly the app logo', async () => {
-
         const logo = screen.getByAltText('FIFA World Cup Scoreboard');
         expect(logo).toHaveAttribute('src', './logo.svg')
     })
