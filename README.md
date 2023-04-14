@@ -1,4 +1,7 @@
 # Football World Cup Scoreboard
+
+>_I have written a tutorial about how I did this. You can find it [here](https://www.mihailgaberov.com/how-to-create-a-live-football-scoreboard-in-react-with-vite-and-vitest/) or [here](https://www.freecodecamp.org/news/react-project-with-vite-and-vitest/)._
+
 A React app simulating a **Live Football World Cup Scoreboard**⚽ that shows matches and scores.
 
 **Notes:** The current implementation uses manually set timers and time intervals for simulating the playing of the games. Here
