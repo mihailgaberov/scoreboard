@@ -3,7 +3,7 @@ import classes from "./result.module.scss";
 
 const Result = ({ homeTeamScore, awayTeamScore }) => {
     return (
-        <div className={classes.result}>{homeTeamScore} - {awayTeamScore}</div>
+        <span className={classes.result}>{homeTeamScore} - {awayTeamScore}</span>
     );
 };
 
