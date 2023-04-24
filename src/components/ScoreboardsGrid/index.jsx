@@ -1,24 +1,27 @@
-import { useReducer, useState } from "react";
+import { useState } from "react"
 
-import classes from "./scoreboards-grid.module.scss";
-import Scoreboard from "../Scoreboard";
-import useInterval from "../../hooks/useInterval";
-import MessageBoard from "../MessageBoard";
-import ScoresReducer, { actionTypes, initialState } from "./ScoresReducer";
-import useRandomInterval from "../../hooks/useRandomInterval";
-import { areAllGamesFinished, getRandomInt } from "../../utils";
-import useTimeout from "../../hooks/useTimeout";
+import classes from "./scoreboards-grid.module.scss"
+import Scoreboard from "../Scoreboard"
+import useInterval from "../../hooks/useInterval"
+import MessageBoard from "../MessageBoard"
+import { useScoreboardStore } from "./ScoresReducer"
+import useRandomInterval from "../../hooks/useRandomInterval"
+import { areAllGamesFinished, getRandomInt } from "../../utils"
+import useTimeout from "../../hooks/useTimeout"
 
 
 const TIME_BEFORE_GAMES_START = 3; // seconds
 const PLAYING_TIME = 90000; // milliseconds
 const ScoreboardsGrid = () => {
     const [timeElapsed, setTimeElapsed] = useState(TIME_BEFORE_GAMES_START);
-    const [state, dispatch] = useReducer(ScoresReducer, initialState);
     const [isPlayingTime, setIsPlayingTime] = useState(true);
+    const games = useScoreboardStore(state => state.games);
+    const finishedGames = useScoreboardStore(state => state.finishedGames);
+    const startGame = useScoreboardStore(state => state.startGame);
+    const finishGame = useScoreboardStore(state => state.finishGame);
+    const updateScore = useScoreboardStore(state => state.updateScore);
 
     const minGameId = 0;
-    const { games, finishedGames } = state;
     const gamesToRender = games.length > 0 ? games : finishedGames;
     const maxGameId = games.length - 1;
 
@@ -35,19 +38,16 @@ const ScoreboardsGrid = () => {
     const delay = [3000, 4000];
     const cancelUpdateGameState = useRandomInterval(() => {
         if (isPlayingTime) {
-            dispatch({ type: actionTypes.START_GAME, data: { gameId: getRandomInt(minGameId, maxGameId) } });
+            startGame(getRandomInt(minGameId, maxGameId));
         } else {
-            dispatch({ type: actionTypes.FINISH_GAME, data: { gameId: getRandomInt(minGameId, initialState.games.length - 1) } });
+            finishGame(getRandomInt(minGameId, games.length - 1));
         }
     }, ...delay);
 
     // Start game score updates
     const updateScoreDelay = [3000, 8000];
     const cancelUpdateScoreInterval = useRandomInterval(() => {
-        dispatch({
-            type: actionTypes.UPDATE_SCORE,
-            data: { gameId: getRandomInt(minGameId, maxGameId), teamId: getRandomInt(1, 2) }
-        });
+        updateScore(getRandomInt(1, 2), getRandomInt(minGameId, maxGameId));
     }, ...updateScoreDelay);
 
     if (areAllGamesFinished(games)) {
